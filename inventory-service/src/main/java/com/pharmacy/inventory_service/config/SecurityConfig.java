@@ -36,7 +36,14 @@ public class SecurityConfig {
                                 "/inventory/reserve",
                                 "/inventory/release")
                         .hasAnyRole("ADMIN", "CASHIER")
+                        .requestMatchers(
+                                "/api-docs/**",
+                                "/swagger/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html"
+                        ).permitAll()
                         .anyRequest().authenticated()
+
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 

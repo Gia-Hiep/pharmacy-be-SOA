@@ -29,6 +29,13 @@ public class SecurityConfig {
                         .requestMatchers("/catalog/medicines/**").hasAnyRole("ADMIN","PHARMACIST","CASHIER","STOREKEEPER")
                         // ghi dữ liệu: chỉ ADMIN/PHARMACIST
                         .requestMatchers("/catalog/**").authenticated()
+
+                        .requestMatchers(
+                                "/api-docs/**",
+                                "/swagger/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html"
+                        ).permitAll()
                 )
                 .httpBasic(Customizer.withDefaults())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
